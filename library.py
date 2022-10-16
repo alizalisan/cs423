@@ -40,6 +40,7 @@ class MappingTransformer(BaseEstimator, TransformerMixin):
     return result
 
 
+ 
 #This class will rename one or more columns.
 class RenamingTransformer(BaseEstimator, TransformerMixin):
 
@@ -69,6 +70,8 @@ class RenamingTransformer(BaseEstimator, TransformerMixin):
   def fit_transform(self, X, y = None):
     result = self.transform(X)
     return result
+
+
 
 class OHETransformer(BaseEstimator, TransformerMixin):
   def __init__(self, target_column, dummy_na=False, drop_first=False):  
@@ -101,7 +104,8 @@ class OHETransformer(BaseEstimator, TransformerMixin):
   def fit_transform(self, X, y = None):
     result = self.transform(X)
     return result
-  
+ 
+
   
 class DropColumnsTransformer(BaseEstimator, TransformerMixin):
   def __init__(self, column_list, action='drop'):
