@@ -222,7 +222,7 @@ class TukeyTransformer(BaseEstimator, TransformerMixin):
     assert self.column_name in X.columns.to_list(), f'unknown column {self.column_name}'
     assert all([isinstance(v, (int, float)) for v in X[self.column_name].to_list()])
 
-    new_df1 = transformed_df.copy()
+    new_df1 = X.copy()
 
     fig, ax = plt.subplots(1,1, figsize=(3,9))
     X.boxplot(self.column_name, vert=True, ax=ax, grid=True)  #normal boxplot
