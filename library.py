@@ -265,7 +265,7 @@ class TukeyTransformer(BaseEstimator, TransformerMixin):
   
   
   
- class MinMaxTransformer(BaseEstimator, TransformerMixin):
+class MinMaxTransformer(BaseEstimator, TransformerMixin):
   def __init__(self):
     pass  #takes no arguments
 
