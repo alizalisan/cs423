@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
 
 
 #This class maps values in a column, numeric or categorical.
