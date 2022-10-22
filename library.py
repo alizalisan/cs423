@@ -236,11 +236,11 @@ class TukeyTransformer(BaseEstimator, TransformerMixin):
       iqr = q3-q1
       outer_low = q1-3*iqr
       outer_high = q3+3*iqr
-      ax.scatter(1, outer_low, c='red', label='outer_low', marker="D", linewidths=5)
-      ax.text(1.1,  outer_low, "Outer fence")
-      ax.scatter(1, outer_high, c='red', label='outer_high', marker="D", linewidths=5)
-      ax.text(1.1,  outer_high, "Outer fence")
-      fig.show()
+      #ax.scatter(1, outer_low, c='red', label='outer_low', marker="D", linewidths=5)
+      #ax.text(1.1,  outer_low, "Outer fence")
+      #ax.scatter(1, outer_high, c='red', label='outer_high', marker="D", linewidths=5)
+      #ax.text(1.1,  outer_high, "Outer fence")
+      #fig.show()
 
       new_df1[self.column_name] = X[self.column_name].clip(lower=outer_low, upper=outer_high)
     elif(self.fence == 'inner'):
@@ -250,11 +250,11 @@ class TukeyTransformer(BaseEstimator, TransformerMixin):
       iqr = q3-q1
       inner_low = q1-1.5*iqr
       inner_high = q3+1.5*iqr
-      ax.scatter(1, inner_low, c='red', label='inner_low', marker="D", linewidths=5)
-      ax.text(1.1,  inner_low, "Inner fence")
-      ax.scatter(1, inner_high, c='red', label='inner_high', marker="D", linewidths=5)
-      ax.text(1.1,  inner_high, "Inner fence")
-      fig.show()
+      #ax.scatter(1, inner_low, c='red', label='inner_low', marker="D", linewidths=5)
+      #ax.text(1.1,  inner_low, "Inner fence")
+      #ax.scatter(1, inner_high, c='red', label='inner_high', marker="D", linewidths=5)
+      #ax.text(1.1,  inner_high, "Inner fence")
+      #fig.show()
 
       new_df1[self.column_name] = X[self.column_name].clip(lower=inner_low, upper=inner_high)
 
