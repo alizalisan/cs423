@@ -226,8 +226,8 @@ class TukeyTransformer(BaseEstimator, TransformerMixin):
 
     new_df1 = X.copy()
 
-    fig, ax = plt.subplots(1,1, figsize=(3,9))
-    X.boxplot(self.column_name, vert=True, ax=ax, grid=True)  #normal boxplot
+    #fig, ax = plt.subplots(1,1, figsize=(3,9))
+    #X.boxplot(self.column_name, vert=True, ax=ax, grid=True)  #normal boxplot
 
     if(self.fence == 'outer'):
       #now add on outer fences
