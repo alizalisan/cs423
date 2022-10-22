@@ -208,10 +208,10 @@ class Sigma3Transformer(BaseEstimator, TransformerMixin):
   
   
 class TukeyTransformer(BaseEstimator, TransformerMixin):
-  def __init__(self, column_name, fence):
-    assert isinstance(column_name, str), f'{self.__class__.__name__} constructor expected string but got {type(column_name)} instead.'
+  def __init__(self, target_column, fence):
+    assert isinstance(target_column, str), f'{self.__class__.__name__} constructor expected string but got {type(target_column)} instead.'
     assert isinstance(fence, str), f'{self.__class__.__name__} constructor expected string but got {type(fence)} instead.'
-    self.column_name = column_name
+    self.column_name = target_column
     self.fence = fence
 
   def fit(self, X, y = None):
