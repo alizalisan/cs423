@@ -216,7 +216,7 @@ class TukeyTransformer(BaseEstimator, TransformerMixin):
   def __init__(self, target_column, fence):
     assert isinstance(target_column, str), f'{self.__class__.__name__} constructor expected string but got {type(target_column)} instead.'
     assert isinstance(fence, str), f'{self.__class__.__name__} constructor expected string but got {type(fence)} instead.'
-    self.column_name = target_column
+    self.target_column = target_column
     self.fence = fence
 
   def fit(self, X, y = None):
@@ -225,8 +225,8 @@ class TukeyTransformer(BaseEstimator, TransformerMixin):
 
   def transform(self, X):
     assert isinstance(X, pd.core.frame.DataFrame), f'{self.__class__.__name__}.transform expected Dataframe but got {type(X)} instead.'
-    assert self.column_name in X.columns.to_list(), f'unknown column {self.column_name}'
-    assert all([isinstance(v, (int, float)) for v in X[self.column_name].to_list()])
+    assert self.target_column in X.columns.to_list(), f'unknown column {self.target_column}'
+    assert all([isinstance(v, (int, float)) for v in X[self.target_column].to_list()])
 
     new_df1 = X.copy()
 
@@ -235,8 +235,8 @@ class TukeyTransformer(BaseEstimator, TransformerMixin):
 
     if(self.fence == 'outer'):
       #now add on outer fences
-      q1 = X[self.column_name].quantile(0.25)
-      q3 = X[self.column_name].quantile(0.75)
+      q1 = X[self.target_column].quantile(0.25)
+      q3 = X[self.target_column].quantile(0.75)
       iqr = q3-q1
       outer_low = q1-3*iqr
       outer_high = q3+3*iqr
@@ -246,11 +246,11 @@ class TukeyTransformer(BaseEstimator, TransformerMixin):
       #ax.text(1.1,  outer_high, "Outer fence")
       #fig.show()
 
-      new_df1[self.column_name] = X[self.column_name].clip(lower=outer_low, upper=outer_high)
+      new_df1[self.target_column] = X[self.target_column].clip(lower=outer_low, upper=outer_high)
     elif(self.fence == 'inner'):
       #now add on outer fences
-      q1 = X[self.column_name].quantile(0.25)
-      q3 = X[self.column_name].quantile(0.75)
+      q1 = X[self.target_column].quantile(0.25)
+      q3 = X[self.target_column].quantile(0.75)
       iqr = q3-q1
       inner_low = q1-1.5*iqr
       inner_high = q3+1.5*iqr
@@ -260,7 +260,7 @@ class TukeyTransformer(BaseEstimator, TransformerMixin):
       #ax.text(1.1,  inner_high, "Inner fence")
       #fig.show()
 
-      new_df1[self.column_name] = X[self.column_name].clip(lower=inner_low, upper=inner_high)
+      new_df1[self.target_column] = X[self.target_column].clip(lower=inner_low, upper=inner_high)
 
     return new_df1
 
