@@ -383,7 +383,6 @@ def dataset_setup(full_table, label_column_name:str, the_transformer, rs, ts=.2)
   features = full_table.drop(columns=label_column_name)
   labels = full_table[label_column_name].to_list()
 
-  from sklearn.model_selection import train_test_split
   X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=ts, shuffle=True,
                                                     random_state=rs, stratify=labels)
   
