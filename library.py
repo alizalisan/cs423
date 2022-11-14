@@ -9,6 +9,9 @@ from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_sc
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
+from sklearn.experimental import enable_halving_search_cv
+from sklearn.model_selection import HalvingGridSearchCV
+
 
 #This class maps values in a column, numeric or categorical.
 class MappingTransformer(BaseEstimator, TransformerMixin):
@@ -438,3 +441,20 @@ def threshold_results(thresh_list, actuals, predicted):
 
   fancy_df = result_df.style.format(precision=2).set_properties(**properties).set_table_styles([headers])
   return (result_df, fancy_df)
+
+
+
+def halving_search(model, grid, x_train, y_train, factor=3, scoring='roc_auc'):
+  #your code below
+  halving_cv = HalvingGridSearchCV(
+    model, grid,  #our model and the parameter combos we want to try
+    scoring=scoring,  #could alternatively choose f1, accuracy or others
+    n_jobs=-1,
+    min_resources="exhaust",
+    factor=factor,  #a typical place to start so triple samples and take top 3rd of combos on each iteration
+    cv=5, random_state=1234,
+    refit=True,  #remembers the best combo and gives us back that model already trained and ready for testing
+  )
+
+  grid_result = halving_cv.fit(x_train, y_train)
+  return grid_result
